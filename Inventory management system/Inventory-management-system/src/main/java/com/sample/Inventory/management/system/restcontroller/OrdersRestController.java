@@ -17,18 +17,18 @@ public class OrdersRestController {
     private OrdersService ordersService;
 
     @RequestMapping(value = "/order", method = RequestMethod.GET, headers = "Accept=application/json")
-    public List<Orders> getAllOrders() {
+    public List<Orders> getAllOrders() throws InternalServerErrorException {
         return ordersService.getAllOrders();
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public Orders saveOrder(@RequestBody Orders orders) {
+    public Orders saveOrder(@RequestBody Orders orders) throws InternalServerErrorException {
         ordersService.createOrders(orders);
         return orders;
     }
 
     @RequestMapping(value = "/updateOrder", method = RequestMethod.PUT)
-    public Orders updateProduct(@RequestBody Orders p) {
+    public Orders updateProduct(@RequestBody Orders p) throws InternalServerErrorException {
         ordersService.editOrders(p);
         return p;
     }
