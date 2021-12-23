@@ -22,6 +22,9 @@ public class Customer {
 
     @Column
     private String address;
+    
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Orders> orders;
 
     public Integer getCid() {
         return cid;
@@ -60,6 +63,15 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+     public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
 
 }
 
