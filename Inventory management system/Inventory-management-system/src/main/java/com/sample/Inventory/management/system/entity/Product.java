@@ -25,6 +25,10 @@ public class Product {
 
     @Column
     private int qty;
+    
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id",referencedColumnName = "oid")
+    private Orders orders;
 
     public Integer getPid() {
         return pid;
@@ -73,6 +77,15 @@ public class Product {
     public void setQty(int qty) {
         this.qty = qty;
     }
+    
+     public Orders getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
+
 
     @Override
     public String toString() {
