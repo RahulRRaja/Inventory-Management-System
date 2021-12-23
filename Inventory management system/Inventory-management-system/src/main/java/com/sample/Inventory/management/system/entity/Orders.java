@@ -1,14 +1,13 @@
 package com.sample.Inventory.management.system.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "orders")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "oid", nullable = false, columnDefinition = "serial")
+    @Column(name = "oid", nullable = false)
     private Integer oid;
 
     @Column
@@ -19,10 +18,13 @@ public class Orders {
 
     @Column(name = "ordertype")
     private String orderType;
-
-    @Temporal(value = TemporalType.DATE)
-    @Column(name = "orderdate")
-    private Date orderDate;
+    
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id",referencedColumnName = "cid")
+    private Customer customer;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "orders")
+    private List<Product> product;
+    
     public Integer getOid() {
         return oid;
     }
@@ -51,11 +53,20 @@ public class Orders {
     public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
-    public Date getOrderDate() {
-        return orderDate;
+    
+     public Customer getCustomer() {
+        return customer;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
-}
+
+    public List<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
+    }
+   }
