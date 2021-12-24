@@ -22,8 +22,9 @@ public class Orders {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id",referencedColumnName = "cid")
     private Customer customer;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "orders")
-    private List<Product> product;
+     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id",referencedColumnName = "pid")
+    private Product product;
     
     public Integer getOid() {
         return oid;
@@ -62,11 +63,11 @@ public class Orders {
         this.customer = customer;
     }
 
-    public List<Product> getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(List<Product> product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
    }
